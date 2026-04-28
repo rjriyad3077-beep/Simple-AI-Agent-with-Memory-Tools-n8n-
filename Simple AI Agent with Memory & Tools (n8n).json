@@ -1,0 +1,134 @@
+{
+  "name": "Simple AI Agent with Memory & Tools (n8n)",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -240,
+        -96
+      ],
+      "id": "c59ad043-92d2-4935-99f2-74b983110e17",
+      "name": "When chat message received",
+      "webhookId": "1ac14721-3b0e-482e-89b1-e19d5f62636f"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "hay,i am your boss so always start the conversion with the word boss.\nand your primary language is bangli.alwys speek bangli"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        160,
+        -192
+      ],
+      "id": "3344a58d-7d60-4781-bb91-fadb443c8712",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        128,
+        112
+      ],
+      "id": "87a73c46-cbbc-4294-8bf7-2e03351ca0cc",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "SZUSQPwsvK8zTisW",
+          "name": "Google Gemini(PaLM) Api account 362"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        256,
+        0
+      ],
+      "id": "91999c4f-c5df-41b8-9e35-564c8780d209",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+      "typeVersion": 1,
+      "position": [
+        432,
+        0
+      ],
+      "id": "f261dfea-edd4-419f-ae11-ee7bb60af535",
+      "name": "Wikipedia"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wikipedia": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "4f8d65f2-bd0f-4cd0-a0de-3a932c92a153",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "50918ee0be4fd9ad8edd59da0eb4c4a6502c186d6a425a1cf635ba824838446e"
+  },
+  "id": "JeSjyiCVLCsjG5bM",
+  "tags": []
+}
